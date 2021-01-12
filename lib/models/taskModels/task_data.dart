@@ -1,20 +1,28 @@
 import 'dart:collection';
+import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:my_draft/models/taskModels/task.dart';
+import 'package:my_draft/utils/tastConst.dart';
 
 class TaskData extends ChangeNotifier {
-  List<Task> _tasks = [
-    Task(title: 'Add it to notes'),
-    Task(title: 'Recursive notes'),
-    Task(title: 'Add storage for tasks'),
-    Task(title: 'Use Hive'),
-    Task(
-        title: 'It will help you to store the whole task as a single variable'),
-    Task(title: 'Also import hive_flutter'),
-  ];
+  List<Task> _tasks = [];
   List<Task> _activeTasks = [];
   List<Task> _inactiveTasks = [];
+
+  TaskData() {
+    getOldTasks();
+  }
+  // List<int> keys;
+  void getOldTasks() {
+    log(taskBox.keys.toString());
+    for (var key in taskBox.keys) {
+      _tasks.add(taskBox.get(key));
+    }
+    updateTasks();
+    log('Done');
+    notifyListeners();
+  }
 
   UnmodifiableListView get tasks {
     return UnmodifiableListView(_tasks);
@@ -51,12 +59,15 @@ class TaskData extends ChangeNotifier {
     for (var e in _tasks) {
       e.isDone ? _inactiveTasks.add(e) : _activeTasks.add(e);
     }
+    taskBox.clear();
+    taskBox.addAll(_tasks);
     // notifyListeners();
   }
 
   void addTask(String taskTitle) {
     _tasks.add(Task(title: taskTitle));
     updateTasks();
+    log(taskBox.keys.toString());
     notifyListeners();
   }
 
@@ -75,6 +86,7 @@ class TaskData extends ChangeNotifier {
   void deleteAll() {
     _tasks.clear();
     updateTasks();
+    taskBox.clear();
     notifyListeners();
   }
 }

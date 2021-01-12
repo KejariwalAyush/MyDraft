@@ -6,24 +6,24 @@ import 'package:my_draft/screens/Tasks/taskContainer.dart';
 import 'package:my_draft/utils/tastConst.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+class TaskHome extends StatefulWidget {
+  const TaskHome({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _TaskHomeState createState() => _TaskHomeState();
 }
 
-class _HomeState extends State<Home> {
+class _TaskHomeState extends State<TaskHome> {
   var tobeShown;
   @override
   void initState() {
     tobeShown = show.all;
+    print(taskBox.keys.toString());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // String newText;
     return Scaffold(
       body: Container(
         padding: EdgeInsets.all(10),
@@ -51,9 +51,6 @@ class _HomeState extends State<Home> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    // alignment: WrapAlignment.spaceBetween,
-                    // direction: Axis.horizontal,
-                    // crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Row(
                         children: [
@@ -73,7 +70,6 @@ class _HomeState extends State<Home> {
                               ),
                               wrapWords: true,
                               minFontSize: 12,
-                              // strutStyle: StrutStyle.fromTextStyle(Theme.of(context).textTheme.headline1),
                             ),
                           ),
                           GestureDetector(
