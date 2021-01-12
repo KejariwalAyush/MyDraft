@@ -23,6 +23,7 @@ class TaskTile extends StatelessWidget {
         color: Colors.redAccent,
         alignment: Alignment.centerRight,
         padding: EdgeInsets.all(5),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Icon(
           Icons.delete_forever,
           color: Colors.white,
