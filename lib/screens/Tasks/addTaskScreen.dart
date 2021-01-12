@@ -42,8 +42,14 @@ class AddTaskScreen extends StatelessWidget {
               TextField(
                 autofocus: true,
                 style: TextStyle(color: Colors.white),
+                decoration: new InputDecoration(hintText: "Paste Here"),
                 onChanged: (value) {
                   newText = value;
+                },
+                onSubmitted: (value) {
+                  log(value);
+                  Provider.of<TaskData>(context, listen: false).addTask(value);
+                  Navigator.pop(context);
                 },
               ),
               SizedBox(
