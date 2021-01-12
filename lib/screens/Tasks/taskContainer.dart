@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:my_draft/models/taskModels/task.dart';
 import 'package:my_draft/models/taskModels/task_data.dart';
 import 'package:my_draft/screens/Tasks/taskTile.dart';
+import 'package:my_draft/utils/tastConst.dart';
 import 'package:provider/provider.dart';
 
 class TaskContainer extends StatelessWidget {
+  var tobeShown;
+  TaskContainer(this.tobeShown);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,11 +19,19 @@ class TaskContainer extends StatelessWidget {
       child: Scrollbar(
         thickness: 5,
         child: ListView.builder(
-          itemCount: Provider.of<TaskData>(context).taskCount,
+          itemCount: tobeShown == show.active
+              ? Provider.of<TaskData>(context).activeTaskCount
+              : tobeShown == show.inactive
+                  ? Provider.of<TaskData>(context).inactiveTaskCount
+                  : Provider.of<TaskData>(context).taskCount,
           itemBuilder: (context, index) {
             return Consumer<TaskData>(
               builder: (context, taskData, child) {
-                Task task = taskData.tasks[index];
+                Task task = tobeShown == show.active
+                    ? taskData.activeTasks[index]
+                    : tobeShown == show.inactive
+                        ? taskData.inactiveTasks[index]
+                        : taskData.tasks[index];
                 return TaskTile(
                   task: task,
                   checkboxToggle: () => taskData.updateTaskDone(task),
