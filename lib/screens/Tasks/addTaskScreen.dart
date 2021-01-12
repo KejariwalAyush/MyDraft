@@ -1,18 +1,20 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:my_draft/models/task_data.dart';
+import 'package:my_draft/models/taskModels/task_data.dart';
 import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  String newText;
+  const AddTaskScreen({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    String newText;
     return Container(
-      color: Color(0xff737373),
+      // color: Color(0xff161616),
+      color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.deepPurpleAccent,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         ),
@@ -23,13 +25,17 @@ class AddTaskScreen extends StatelessWidget {
           children: [
             Text(
               'Add Task',
-              style: Theme.of(context).textTheme.headline3,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40,
+              ),
             ),
             SizedBox(
               height: 10,
             ),
             TextField(
               autofocus: true,
+              style: TextStyle(color: Colors.white),
               onChanged: (value) {
                 newText = value;
               },
@@ -44,7 +50,7 @@ class AddTaskScreen extends StatelessWidget {
                       .addTask(newText);
                   Navigator.pop(context);
                 },
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).buttonColor,
                 icon: Icon(
                   Icons.add,
                   color: Colors.white,

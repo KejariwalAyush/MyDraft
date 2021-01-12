@@ -1,12 +1,17 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:my_draft/models/task.dart';
+import 'package:my_draft/models/taskModels/task.dart';
 
 class TaskData extends ChangeNotifier {
   List<Task> _tasks = [
     Task(title: 'Add it to notes'),
     Task(title: 'Recursive notes'),
+    Task(title: 'Add it to notes'),
+    Task(title: 'Recursive notes'),
+    Task(title: 'Add it to notes'),
+    Task(title: 'Recursive notes'),
+    Task(title: 'Add it to notes'),
   ];
 
   UnmodifiableListView get tasks {
